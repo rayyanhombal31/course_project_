@@ -26,6 +26,14 @@ def assign_grade(average):
         return "Grade F"
 
 
+def check_pass_fail(m1, m2, m3):
+    """Return 'Pass' if all three subjects are >= 40 and average >= 40, else 'Fail'."""
+    avg = calculate_average(m1, m2, m3)
+    if m1 >= 40 and m2 >= 40 and m3 >= 40 and avg >= 40:
+        return "Pass"
+    return "Fail"
+
+
 def get_student_report(name, department, semester, marks):
     """Accept student details and three subject marks, returning a complete evaluation dictionary."""
     if not name or not str(name).strip():
@@ -37,6 +45,7 @@ def get_student_report(name, department, semester, marks):
 
     avg = calculate_average(marks[0], marks[1], marks[2])
     grade = assign_grade(avg)
+    result = check_pass_fail(marks[0], marks[1], marks[2])
     return {
         "name": name.strip(),
         "department": department.strip(),
@@ -44,13 +53,11 @@ def get_student_report(name, department, semester, marks):
         "marks": list(marks),
         "average": avg,
         "grade": grade,
-        "status": "Pass" if all(m >= 40 for m in marks) and avg >= 40 else "Fail"
+        "result": result
     }
 
 
 if __name__ == "__main__":
-    report = get_student_report("Rayyan", "BCA", 3, [85, 92, 78])
-    print(report)
+    print(get_student_report("Rayyan", "BCA", 3, [85, 92, 78]))
+    print(get_student_report("Firoz", "BCA", 3, [80, 75, 32]))
 ```[cite: 12]
-
-*(Note: Lines 44 onward were cut off at the bottom of your screenshot, so the remaining dictionary keys and `if __name__ == "__main__":` block have been completed cleanly to match lines 1–43.)*[cite: 12]
